@@ -1,0 +1,2 @@
+"source","term_name","term_id","adjusted_p_value","negative_log10_of_adjusted_p_value","term_size","query_size","intersection_size","effective_domain_size","intersections"
+"GO:CC","bounding membrane of organelle","GO:0098588","0.014731354694117729","1.831757313637512","674","44","14","6566","YNR006W,YNL305C,YDR100W,YJL210W,YNL293W,YIL065C,YEL043W,YPL186C,YOR291W,YBR015C,YNL275W,YER087C-B,YER019W,YOR069W"
