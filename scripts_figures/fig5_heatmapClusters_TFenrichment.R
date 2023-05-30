@@ -7,8 +7,8 @@ library(ggrepel)
 # upload heatmap clusters
 allHeatmapGenes = read.csv("data/analysis/heatmap_clusters/heatmapClusters.csv")
 
-# upload TF targets
-load("/Users/lilcrusher/annotations/yeast_DBFs/geneTargets.Rdata")
+# upload TF targets: assigned TFs to genes (only for regions withing -250:+100 bp from TSS)
+load("data/YeastEpi_geneTargets.Rdata")
 
 
 # do Fisher's test for each gene list vs all TF targets
@@ -69,22 +69,8 @@ write.csv(resultTable,"data/analysis/heatmap_clusters/TF_enrichment/allTFenrichm
 sigRes = resultTable %>% dplyr::filter(FDR<0.05) 
 write.csv(sigRes,"data/analysis/heatmap_clusters/TF_enrichment/sigTFenrichment.csv")
 
-# filte out significant and write down results
+# filter out significant and write down results
 sigPRes = resultTable %>% dplyr::filter(p<0.05) 
 write.csv(sigPRes,"data/analysis/heatmap_clusters/TF_enrichment/sigP_TFenrichment.csv")
 
 
-
-# notPIC = resultTable %>% dplyr::filter(FDR<0.05) %>% 
-#   dplyr::filter(!str_detect(TF, "^Taf")) %>%
-#   dplyr::filter(!str_detect(TF, "^CTD")) %>%
-#   dplyr::filter(!str_detect(TF, "^Tf")) %>%
-#   dplyr::filter(!str_detect(TF, "^Ccl1")) %>%
-#   dplyr::filter(!str_detect(TF, "^Spt15")) %>%
-#   dplyr::filter(!str_detect(TF, "^Ssl1")) %>%
-#   dplyr::filter(!str_detect(TF, "^TAF")) %>%
-#   dplyr::filter(!str_detect(TF, "^TOA1")) %>%
-#   dplyr::filter(!str_detect(TF, "^TFA1")) %>%
-#   dplyr::filter(!str_detect(TF, "^Kin28")) %>%
-#   dplyr::filter(!str_detect(TF, "^Rpb")) %>%
-#   dplyr::filter(!str_detect(TF, "^Bdf2"))

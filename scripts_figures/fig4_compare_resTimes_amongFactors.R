@@ -57,28 +57,9 @@ p + geom_point(alpha = 0.2, color = "grey40") +
         panel.grid.minor = element_blank()) +
   xlab("residence time [min]") +
   ylab("residence time [min]") + coord_fixed()
-ggsave("figures/panels/fig4/compare_resTimes_individual_factors.pdf", width = 14, height = 14, units = "cm")
+#ggsave("figures/panels/fig4/compare_resTimes_individual_factors.pdf", width = 14, height = 14, units = "cm")
 
 
-# colored based on synthesis rate
-# p = ggplot(plotData, aes(x = x, y = y, color = cropped))
-# p + geom_point(alpha = 0.3) +
-#   theme_bw() +
-#   facet_grid(factorName_y ~ factorName_x) +
-#   theme(panel.background = element_rect(fill = "transparent"), # bg of the panel
-#         plot.background = element_rect(fill = "transparent", color = NA),
-#         legend.background = element_rect(fill = "transparent"),
-#         text = element_text(size=10),
-#         strip.background=element_rect(colour="black",
-#                                       fill="white"),
-#         strip.text = element_text(face = "bold"),
-#         panel.grid.major = element_blank(), 
-#         panel.grid.minor = element_blank()) +
-#   xlab("residence time [min]") +
-#   ylab("residence time [min]") +
-#   scale_color_viridis(option = "B", direction = -1) +
-#   coord_fixed()
-# ggsave("figures/panels/figSb/compare_resTimes_individual_factors_synthesisRate.pdf", width = 14, height = 14, units = "cm")
   
 p = ggplot(plotData, aes(x = x, y = y, z = cropped))
 p + geom_point(alpha = 0.2, color = "grey70") +
@@ -100,7 +81,7 @@ p + geom_point(alpha = 0.2, color = "grey70") +
   ylab("residence time [min]") +
   scale_fill_viridis_c(option = "B", direction = -1)+
   coord_fixed()
-ggsave("figures/panels/fig4/compare_resTimes_individual_factors_synthesisRate.pdf", width = 14, height = 14, units = "cm")
+#ggsave("figures/panels/fig4/compare_resTimes_individual_factors_synthesisRate.pdf", width = 14, height = 14, units = "cm")
 
 
 
