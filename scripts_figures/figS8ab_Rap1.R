@@ -5,20 +5,20 @@ library(ggpubr)
 
 set.seed(42)
 
-# upload reasidence times of Rap1
-rap1 = read.csv("data/Rap1_resTime.csv") %>% 
+# upload residence times of Rap1
+rap1 = read.csv("data/previously_published/Rap1_resTime_Lickwar.csv") %>% 
   mutate(gene = ifelse(startsWith(gene,"i"), sub(".", "", gene), gene)) %>% 
   mutate(Rap1 = resTime) %>% 
   mutate(Rap1_z = Z_resTime) %>% 
   dplyr::select(gene, Rap1, Rap1_z)
 
-# upload table replace <1 min with a random number between 0-1
-# make class labels
+# upload residence time table replace <1 min with a random number between 0-1
 resTimes = read.csv("data/residence_times_all.csv") %>% 
   dplyr::select(-c(peakName)) %>% 
   pivot_longer(cols = TBP:TFIIF, names_to = "factorName", values_to = "resTime", values_drop_na = TRUE) %>% 
   distinct()
 
+# attach Rap1 table
 plotResTime = resTimes %>% 
   mutate(randNum = runif(nrow(resTimes), min=0, max=1)) %>% 
   mutate(resTimesNum = ifelse(resTime == "<1", randNum, as.numeric(resTime))) %>% 
@@ -39,6 +39,7 @@ corelations = plotResTime %>%
 
 # add color for each factor
 colorPalette = c("#F2C249", "#E6772E", "#3D4C53", "#4DB3B3", "#E64A45")
+# plot
 p = ggplot(plotResTime, aes(x = resTimesNumCropped, y = Rap1, color = factorName))
 p + geom_point() +
   theme_bw() +
@@ -59,7 +60,7 @@ p + geom_point() +
   geom_text(data = corelations, aes(label = myLabel), y = 150, x = 10, color = "black", size = 3) +
   geom_vline(xintercept = 1, color = "grey40", linetype = "dashed") +
   ylim(25, 155)
-ggsave("figures/panels/figSf/resTime_vs_Rap1resTime.pdf", width = 17, height = 4.5, units = "cm")
+#ggsave("figures/panels/figS8/resTime_vs_Rap1resTime.pdf", width = 17, height = 4.5, units = "cm")
 
 
 # compare Ra1 residence times for long- vs -shortlived TFIIF
@@ -68,7 +69,7 @@ longVsShort = plotResTime %>%
   mutate(TFIIF_class = ifelse(resTimesNum > 5, "long-lived", "short-lived"))
 
 longVsShort$TFIIF_class = factor(longVsShort$TFIIF_class, levels = c("short-lived", "long-lived"))
-
+# plot
 p = ggplot(longVsShort, aes(x = TFIIF_class, y = Rap1, fill = TFIIF_class))
 p + geom_point(position=position_jitterdodge(jitter.width = 0.5), 
                aes(color = TFIIF_class), alpha = 0.5) + 
@@ -85,7 +86,7 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.5),
   scale_fill_manual(values= c("#E29930", "#217CA3")) +
   scale_color_manual(values= c("#E29930", "#217CA3")) + 
   stat_compare_means(method = "t.test", label = "p.signif", label.y = 150)
-ggsave("figures/panels/figSf/Rap1_vs_TFIIFlong_short.pdf", width = 2.8, height = 6, units = "cm")
+#ggsave("figures/panels/figS8/Rap1_vs_TFIIFlong_short.pdf", width = 2.8, height = 6, units = "cm")
 
 
 

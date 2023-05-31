@@ -5,7 +5,7 @@ library(RColorBrewer)
 library(ggrepel)
 
 
-# upload table replace <1 min with a random number between 0-1
+# upload table with residence times and replace <1 min with a random number between 0-1
 # make class labels
 resTimes = read.csv("data/residence_times_all.csv") %>% 
   dplyr::select(c(gene, TFIIF)) %>% 
@@ -19,16 +19,17 @@ plotResTime = resTimes %>%
 
 
 # upload residence time table - select TFIIF 
-# and separate those into long-lived or not
-# extract the long-lived TFIIF genes
-longTFIIF = plotResTime %>% 
-  dplyr::filter(TFIIF >= 5)%>% 
-  dplyr::select(gene)
-# 
-# write.table(longTFIIF$gene,"data/analysis/long_TFIIF/genes.txt", quote = F,row.names = F, col.names = F)
+# and separate those into long-lived (5 min thresh.) or not
+# extract the short-lived TFIIF genes
+shortTFIIF = plotResTime %>% 
+  mutate(shortTFIIF = ifelse(TFIIF <5, "yes", "no")) %>% 
+  mutate(shortTFIIF = factor(shortTFIIF, levels = c("yes", "no")))
+#write.table(shortTFIIF$gene,"data/analysis/short_TFIIF/genes.txt", quote = F,row.names = F, col.names = F)
 
-# upload results from g:Profiler
-gprofiler = read.csv("data/analysis/long_TFIIF/gProfiler.csv") %>% 
+# paste the lists of long lived and short lived genes to g:Profiler
+# upload results from g:Profiler: TF targets (for duplicated results from g:Profiler 
+# pick the one with the most significant enrichment)
+gprofiler = read.csv("data/analysis/short_TFIIF/gProfiler.csv") %>% 
   dplyr::filter(source == "TF") %>% 
   separate(term_name, into = c("toss", "TF"), sep = ": ", extra = "drop") %>% 
   dplyr::select(-toss) %>% 
@@ -36,60 +37,47 @@ gprofiler = read.csv("data/analysis/long_TFIIF/gProfiler.csv") %>%
   dplyr::select(-toss) %>% 
   mutate(TF = ifelse(endsWith(TF, "p"), str_sub(TF, end = -2), TF)) %>% 
   group_by(TF) %>% 
-  slice(which.max(negative_log10_of_adjusted_p_value)) %>% 
+  dplyr::slice(which.max(negative_log10_of_adjusted_p_value)) %>% 
   dplyr::select(TF, negative_log10_of_adjusted_p_value)%>% 
   mutate(TF = str_to_title(TF))
 
-# compare results from my TF enrichment and from g:Profiler
-sigRes = read.csv("data/analysis/long_TFIIF/sigTFenrichment.csv")
+# compare results from  significant TF target enrichment (Yeats Epigeneome database gene targets): 
+# these were generated analogously with "figS7f_TFIIF_shortLived_YeastEpi_enrichment.R") 
+# and compare to results from g:Profiler
+sigRes = read.csv("data/analysis/short_TFIIF/sigTFenrichment.csv")
 plotRes = sigRes %>% 
   dplyr::select(TF, logFDR) %>% 
   mutate(TF = str_to_title(TF)) %>% 
   full_join(gprofiler) %>% 
   replace_na(list(negative_log10_of_adjusted_p_value = 0, logFDR = 0))
 
-
+# plot results from g:Profiler "validated" with our TF enrichment results
 p = ggplot(plotRes, aes(x = logFDR, y = negative_log10_of_adjusted_p_value))
 p +geom_point() +
   theme_classic() +
   geom_label_repel(aes(label = TF),
                    box.padding   = 0.35,
                    point.padding = 0.5,
-                   segment.color = 'grey50') +
-  xlab("my enrichment - log10FDR") +
-  ylab("gProfiles = log10(padj")
-#ggsave("figures/panels/random/compare_TFIIF_gProfiler_and_myEnrichmnet.pdf", width = 5, height = 5)
-
-# plot results from g:Profiler validated with our results
-plotRes = sigRes %>% 
-  dplyr::select(TF, logFDR) %>% 
-  mutate(TF = str_to_title(TF)) %>% 
-  full_join(gprofiler) %>% 
-  dplyr::filter(!is.na(negative_log10_of_adjusted_p_value))
-p = ggplot(plotRes, aes(y = reorder(TF, negative_log10_of_adjusted_p_value), 
-                        x = negative_log10_of_adjusted_p_value, fill = logFDR))
-p + geom_bar(stat= "identity") +
-  theme_classic() +
-  #theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1))+
-  scale_fill_distiller(palette = "Reds", direction = 1, na.value = "grey70",
-                       name = paste("Yeast Epi.", "-log10(FDR)", sep = "\n")) +
-  ylab("")+
-  xlab(expression(paste("TRANSFAC ",-log[10],"(padj)"))) +
+                   segment.color = 'grey50', size = 2.5) +
+  ylab(expression(paste("TRANSFAC: ",-log[10],"(padj)")))+
+  xlab(expression(paste("Yeast Epi.: ",-log[10],"(FDR)"))) +
   theme(panel.background = element_rect(fill = "transparent"), # bg of the panel
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=9))
-ggsave("figures/panels/figSe/TFIIE_longLived_gProfiler.pdf", width = 7, height = 5, units = "cm")
+#ggsave("figures/panels/figS7/compare_shortTFIIF_gProfiler_and_myEnrichmnet.pdf", width = 5, height = 5, units = "cm")
 
-# upload results from g:Profiler
-pathways = read.csv("data/analysis/long_TFIIF/gProfiler.csv") %>% 
+
+# upload pathway results from g:Profiler (get maximum top 5 from each database)
+pathways = read.csv("data/analysis/short_TFIIF/gProfiler.csv") %>% 
   dplyr::filter(source %in% c("GO:BP", "GO:MF", "KEGG", "WP")) %>% 
   group_by(source) %>% 
   arrange(desc(negative_log10_of_adjusted_p_value)) %>% 
-  slice(1:5) %>% 
+  dplyr::slice(1:5) %>% 
   ungroup() %>% 
   mutate(term_name = tolower(term_name)) %>% 
   mutate(term_name = fct_reorder(term_name,negative_log10_of_adjusted_p_value)) 
 
+#plot
 p = ggplot(pathways, aes(y = fct_reorder(term_name,negative_log10_of_adjusted_p_value), 
                          x = negative_log10_of_adjusted_p_value, fill = source))
 p + geom_bar(stat= "identity") +
@@ -102,4 +90,4 @@ p + geom_bar(stat= "identity") +
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=9),
         axis.text=element_text(size=8), legend.position = "top") 
-ggsave("figures/panels/figSe/TFIIF_longLived_gProfiler.pdf", width = 7, height = 7, units = "cm")
+#ggsave("figures/panels/figS7/TFIIF_shortLived_gProfiler.pdf", width = 9, height = 7, units = "cm")

@@ -1,7 +1,7 @@
 rm(list = ls())
 library(tidyverse)
 
-# plot results from my TF enrichment
+# plot results from TF enrichment of Yeast Epigenome gene targets
 # upload annotation (manually created labels)
 annot = read.csv("data/analysis/heatmap_clusters/TF_enrichment/sigP_TFenrichment_labels.csv")
 # upload results of significant TF target enrichment (Yeats Epigeneome database gene targets): 

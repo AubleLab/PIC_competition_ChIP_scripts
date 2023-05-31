@@ -26,7 +26,7 @@ plotResTime = resTimes %>%
   dplyr::select(gene, TFIIB, TFIIE, TFIIF, TFIIA, TBP) %>% 
   left_join(synthesisRates) 
 
-# get linear models for individual TFs
+# get linear models for individual TFs (res. time vs. synthesis rate)
 TFIIE = lm(data = plotResTime, formula = synthesis_perCell_perMin ~ TFIIE)
 summary(TFIIE)  
 model = data.frame(factorName = "TFIIE", p = summary(TFIIE)$coefficients[,4][2], beta = TFIIE$coefficients[2], type = "single")
@@ -60,12 +60,14 @@ allModel = data.frame(factorName = names(all$coefficients[-1]), p = summary(all)
                       type = rep("combined", length(all$coefficients[-1]))) 
 model = rbind(model, allModel)
 
-
+# make table for plotting
 plotModel = model %>% 
   mutate(negLog10p = -log10(p))
 
 plotModel$factorName = factor(plotModel$factorName, levels = c("TBP", "TFIIA", "TFIIB", "TFIIF", "TFIIE"))
 colorPalette = c("#F2C249", "#E6772E", "#3D4C53", "#4DB3B3", "#E64A45")
+
+# plot individual models
 p = ggplot(plotModel %>% dplyr::filter(type == "single"), aes(x = factorName, y = beta, fill = factorName))
 p + geom_bar(stat = "identity", position = "dodge") +
   theme_classic() +
@@ -83,9 +85,9 @@ p + geom_bar(stat = "identity", position = "dodge") +
   xlab("") +
   geom_hline(yintercept = 0) +
   ylim(-0.1, 0.07)
-ggsave("figures/panels/figSc/lm_beta_singleParam.pdf", width = 6, height = 4, units = "cm")
+#ggsave("figures/panels/figS5/lm_beta_singleParam.pdf", width = 6, height = 4, units = "cm")
 
-
+# plot betas from combined model
 p = ggplot(plotModel %>% dplyr::filter(type == "combined"), aes(x = factorName, y = beta, fill = factorName))
 p + geom_bar(stat = "identity", position = "dodge") +
   theme_classic() +
@@ -103,4 +105,4 @@ p + geom_bar(stat = "identity", position = "dodge") +
   xlab("") +
   geom_hline(yintercept = 0)+
   ylim(-0.1, 0.07)
-ggsave("figures/panels/figSc/lm_beta_combinedParam.pdf", width = 6, height = 4, units = "cm")
+ggsave("figures/panels/figS5/lm_beta_combinedParam.pdf", width = 6, height = 4, units = "cm")

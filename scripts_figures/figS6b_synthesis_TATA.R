@@ -5,11 +5,11 @@ library(ggpubr)
 
 set.seed(42)
 
-# load synthesis rates and get quartiles 
+# get list of TATA promoters
 TATA = read.csv("data/TATA_information.csv") 
 
 
-# upload table replace <1 min with a random number between 0-1
+# load synthesis rates and attach info about TATA promoters
 synthesisRates = read.csv("data/synthesisRates.csv") %>% 
   mutate(cropped = ifelse(synthesis_perCell_perMin > 1.5, 1.5, synthesis_perCell_perMin))%>% 
   inner_join(TATA) %>% 
@@ -18,6 +18,7 @@ synthesisRates = read.csv("data/synthesisRates.csv") %>%
 
 synthesisRates$TATA_class = factor(synthesisRates$TATA_class, levels = c("TATA-less", "TATA-containing"))
 
+# plot
 p = ggplot(synthesisRates, aes(x = x , y = cropped, fill = TATA_class))
 p + geom_point(position=position_jitterdodge(jitter.width = 0.3), 
                aes(color = TATA_class), alpha = 0.5) + 
@@ -36,6 +37,6 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.3),
   scale_color_manual(values= c("#F5BE41", "#31A9B8")) +
   ylim(0,1.6) + 
   stat_compare_means(method = "t.test", label = "p.signif", label.y = 1.6)
-ggsave("figures/panels/figSd/synthesis_vs_TATA.pdf", width = 2.8, height = 6, units = "cm")
+#ggsave("figures/panels/figS6/synthesis_vs_TATA.pdf", width = 2.8, height = 6, units = "cm")
 
 

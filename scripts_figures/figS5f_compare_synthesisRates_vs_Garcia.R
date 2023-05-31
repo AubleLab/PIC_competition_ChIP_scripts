@@ -5,7 +5,7 @@ library(tidyverse)
 library(RColorBrewer)
 
 # upload published synthesis rates
-TR = read.delim("/Users/lilcrusher/competitionChIP/transcription_rates/transcription_rates_galactose.txt") %>% 
+TR = read.delim("data/previously_published/Garcia_transcription_rates_galactose.txt") %>% 
   dplyr::select(-gene_name) %>% 
   dplyr::rename(gene = ORF)%>% 
   mutate(cropped_TR = ifelse(TR_galactose > .5, .5, TR_galactose))
@@ -34,8 +34,7 @@ p + geom_bin2d(bins = 50) +
   theme(panel.background = element_rect(fill = "transparent", color = "black"), # bg of the panel
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=9), legend.position = "top") 
-ggsave("figures/panels/figSc/synthesisRates_vs_publised_density.pdf", width = 5.5, 
-       height = 5.5, units = "cm")
+#ggsave("figures/panels/figS5/synthesisRates_vs_publised_density.pdf", width = 5.5, height = 5.5, units = "cm")
 
 
 

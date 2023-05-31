@@ -1,10 +1,10 @@
 rm(list = ls())
 library(tidyverse)
 
-# upload gene classes
-
+# upload gene classes (manually curated)
 geneClass = read.csv("data/analysis/heatmap_clusters/TF_enrichment/sigP_TFenrichment_labels.csv")
-# plot results from my TF enrichment
+
+# plot results from my TF enrichment (script: fig5_myTF_enrichment.R)
 sigRes = read.csv("data/analysis/heatmap_clusters/TF_enrichment/sigP_TFenrichment.csv")
 plotRes = sigRes %>% 
   dplyr::select(TF, p, cluster, logFDR, FDR) %>% 
@@ -16,7 +16,7 @@ plotRes = sigRes %>%
   drop_na() %>% 
   mutate(combo = paste(cluster, label1, TF))
   
-
+# plot
 p = ggplot(plotRes, 
            aes(x = combo, 
                y = 1, fill = logFDR))
@@ -37,6 +37,6 @@ p + geom_bar(stat= "identity", color = "grey80") +
   scale_x_discrete(breaks=plotRes$combo,
                      labels=plotRes$TF) +
   scale_y_continuous(breaks = scales::pretty_breaks(n = 1))
-ggsave("figures/panels/figSf/myTFenrichment_clusters.pdf", width = 16, height = 10, units = "cm")
+#ggsave("figures/panels/figSf/myTFenrichment_clusters.pdf", width = 16, height = 10, units = "cm")
 
 

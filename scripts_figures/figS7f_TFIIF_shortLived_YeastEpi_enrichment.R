@@ -5,7 +5,7 @@ library(RColorBrewer)
 library(ggrepel)
 
 
-# upload table replace <1 min with a random number between 0-1
+# upload table with residence times and replace <1 min with a random number between 0-1
 # make class labels
 resTimes = read.csv("data/residence_times_all.csv") %>% 
   dplyr::select(c(gene, TFIIF)) %>% 
@@ -18,8 +18,10 @@ plotResTime = resTimes %>%
   dplyr::select(gene, TFIIF)
 
 
+
 # upload residence time table - select TFIIF 
-# and separate those into long-lived or not
+# and separate those into short-lived (5 min thresh.) or not
+# assign short-lived labels
 shortTFIIF = plotResTime %>% 
   mutate(shortTFIIF = ifelse(TFIIF <5, "yes", "no")) %>% 
   mutate(shortTFIIF = factor(shortTFIIF, levels = c("yes", "no")))
@@ -28,7 +30,7 @@ shortTFIIF = plotResTime %>%
 load("/Users/lilcrusher/annotations/yeast_DBFs/geneTargets.Rdata")
 
 
-# do Fisher's test for each 
+# do Fisher's test for each TF 
 for (TF in names(geneTargets)){
   TFgenes = geneTargets[[TF]]
   
@@ -63,7 +65,7 @@ FDR = p.adjust(resultTable$p, method = "fdr")
 
 resultTable$FDR = FDR 
 resultTable$logFDR = -log10(resultTable$FDR)
-
+# remove PIC associated TFs from the results and plot
 p = ggplot(resultTable %>% dplyr::filter(FDR<0.05) %>% 
              dplyr::filter(!str_detect(TF, "^Taf")) %>% 
              dplyr::filter(!str_detect(TF, "^CTD")) %>% 
@@ -87,7 +89,7 @@ p + geom_bar(stat = "identity") +
   xlab(expression(paste(-log[10],"(FDR)")))+
   ylab("")
 #theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-ggsave("figures/panels/figSe/TFIIF_shortLived_myEnrichment.pdf", height =2, width = 6, units = "cm")
+#ggsave("figures/panels/figS7/TFIIF_shortLived_myEnrichment.pdf", height =2, width = 6, units = "cm")
 
 sigRes = resultTable %>% dplyr::filter(FDR<0.05) #%>% 
   # dplyr::filter(!str_detect(TF, "^Taf")) %>% 
@@ -102,5 +104,5 @@ sigRes = resultTable %>% dplyr::filter(FDR<0.05) #%>%
   # dplyr::filter(!str_detect(TF, "^Kin28")) %>% 
   # dplyr::filter(!str_detect(TF, "^Rpb")) %>% 
   # dplyr::filter(!str_detect(TF, "^Bdf2"))
-write.csv(sigRes,"data/analysis/short_TFIIF/sigTFenrichment.csv")
+#write.csv(sigRes,"data/analysis/short_TFIIF/sigTFenrichment.csv")
 

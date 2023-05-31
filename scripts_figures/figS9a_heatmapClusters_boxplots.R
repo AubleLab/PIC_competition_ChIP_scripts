@@ -9,8 +9,7 @@ library(circlize)
 set.seed(42)
 
 
-# upload table replace <1 min with a random number between 0-1
-# make class labels
+# upload residence time table replace <1 min with a random number between 0-1
 resTimes = read.csv("data/residence_times_all.csv") %>% 
   dplyr::select(-c(peakName, TBP)) %>% 
   pivot_longer(cols = TFIIA:TFIIF, names_to = "factorName", values_to = "resTime", values_drop_na = TRUE) %>% 
@@ -23,8 +22,9 @@ plotResTime = resTimes %>%
 
 
 ###################################################
-#------ heatmap ------
+#------ heatmap clusters
 ###################################################
+# make residence time table to be usable for heatmap
 heatmapTable = plotResTime %>%
   ungroup() %>% 
   pivot_wider(names_from = factorName, values_from = resTimesNum) %>% 
@@ -40,7 +40,7 @@ rownames(heatmapTableFilt) = NULL
 zHeatmap = scale(heatmapTableFilt)
 
 col_fun = colorRamp2(c(-2, 0, 2), c("#31A9B8", "white", "#CF3721"))
-# extract the gene names for each cluster
+# create heatmap and extract the gene names for each cluster
 ht = Heatmap(zHeatmap, 
              cluster_columns = F, 
              clustering_method_rows = "ward.D", 
@@ -61,6 +61,7 @@ for (i in 1:length(clusters)){
   }
 }
 
+# plot heatmap as box plots
 plotTable = as.data.frame(zHeatmap) %>% 
   mutate(gene = genes) %>% 
   pivot_longer(!gene, names_to = "factorName", values_to = "resTime", values_drop_na = T) %>% 
@@ -83,7 +84,7 @@ p + geom_boxplot(outlier.shape=NA, alpha = 0.2) +
   facet_wrap(~cluster, scales = "free", ncol = 5) + 
   scale_color_manual(values = c("#E6772E", "#3D4C53", "#4DB3B3", "#E64A45")) + 
   scale_fill_manual(values = c("#E6772E", "#3D4C53", "#4DB3B3", "#E64A45"))
-ggsave("figures/panels/figSf/heatmapClusters_boxplots.pdf", width = 17, height = 8, units = )
+#ggsave("figures/panels/figS9/heatmapClusters_boxplots.pdf", width = 17, height = 8, units = )
 
 
 

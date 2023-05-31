@@ -4,8 +4,8 @@ library(tidyverse)
 library(viridis)
 
 set.seed(42)
-# upload the published data
-Zaidi = read.csv("/Users/lilcrusher/competitionChIP/TBP_Zaidi/TBPresTime_Zaidi_etal_SciRep_2017.csv") %>% 
+# upload the published data with TBP estimates
+Zaidi = read.csv("data/previously_published/TBPresTime_Zaidi_etal_SciRep_2017.csv") %>% 
   dplyr::select(-X)
 
 # upload table replace <1 min with a random number between 0-1
@@ -27,6 +27,7 @@ r = plotResTime %>%
 # plot
 colorPalette =  c("#E29930", "#217CA3", "#32384D")
 
+# plot
 p = ggplot(plotResTime, aes(y = TBPNum, x = Zaidi, color = geneType))
 p + geom_point(alpha = 0.5, size = 1) +
   #  geom_density_2d(color = "grey50", binwidth = 0.015, alpha = 0.7) +
@@ -44,5 +45,5 @@ p + geom_point(alpha = 0.5, size = 1) +
         legend.position = "none") +
   scale_color_manual(values = colorPalette)
 
-ggsave("figures/panels/figSc/TBP_vs_Zaidi_density.pdf", width = 5.5, height = 5.5, units = "cm")
+#ggsave("figures/panels/figSc/TBP_vs_Zaidi_density.pdf", width = 5.5, height = 5.5, units = "cm")
 

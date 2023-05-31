@@ -5,7 +5,7 @@ library(RColorBrewer)
 library(ggrepel)
 
 
-# upload table replace <1 min with a random number between 0-1
+# upload residence time table replace <1 min with a random number between 0-1
 # make class labels
 resTimes = read.csv("data/residence_times_all.csv") %>% 
   dplyr::select(c(gene, TFIIF)) %>% 
@@ -19,7 +19,8 @@ plotResTime = resTimes %>%
 
 
 # upload residence time table - select TFIIF 
-# and separate those into long-lived or not
+# and separate those into long-lived (5 min thresh.) or not
+# assign long-lived labels
 longTFIIF = plotResTime %>% 
   mutate(longTFIIF = ifelse(TFIIF >= 5, "yes", "no")) %>% 
   mutate(longTFIIF = factor(longTFIIF, levels = c("yes", "no")))
@@ -28,7 +29,7 @@ longTFIIF = plotResTime %>%
 load("/Users/lilcrusher/annotations/yeast_DBFs/geneTargets.Rdata")
 
 
-# do Fisher's test for each 
+# do Fisher's test for each TF 
 for (TF in names(geneTargets)){
   TFgenes = geneTargets[[TF]]
   
@@ -63,7 +64,7 @@ FDR = p.adjust(resultTable$p, method = "fdr")
 
 resultTable$FDR = FDR 
 resultTable$logFDR = -log10(resultTable$FDR)
-
+# remove PIC associated TFs from the results and plot
 p = ggplot(resultTable %>% dplyr::filter(FDR<0.05) %>% 
              dplyr::filter(!str_detect(TF, "^Taf")) %>% 
              dplyr::filter(!str_detect(TF, "^CTD")) %>% 
@@ -87,7 +88,7 @@ p + geom_bar(stat = "identity") +
   xlab(expression(paste(-log[10],"(FDR)")))+
   ylab("")
   #theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-ggsave("figures/panels/figSe/TFIIF_longLived_myEnrichment.pdf", height = 20, width = 6, units = "cm")
+
 
 sigRes = resultTable %>% dplyr::filter(FDR<0.05) 
 #write.csv(sigRes,"data/analysis/long_TFIIF/sigTFenrichment.csv")
@@ -126,5 +127,5 @@ p + geom_bar(stat= "identity", color = "grey80") +
   #scale_x_discrete(breaks=plotRes$combo,
    #                labels=plotRes$TF) +
   facet_wrap(~GTFlabel, scales = "free_x", ncol = 1)
-ggsave("figures/panels/figSe/myTFenrichment_longTFIIF.pdf", width = 17, height = 10, units = "cm")
+ggsave("figures/panels/figS7/myTFenrichment_longTFIIF.pdf", width = 17, height = 10, units = "cm")
 
