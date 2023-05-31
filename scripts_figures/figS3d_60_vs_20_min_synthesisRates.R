@@ -1,6 +1,6 @@
 rm(list = ls())
 
-synthesis = read.csv("data/dynamicDTA_60_20_min_LtoT_bias.csv") %>% 
+synthesis = read.csv("data/synthesisRatesEstimates_20_vs_60_min.csv") %>% 
   dplyr::filter(!is.na(synthesis60) & !is.na(synthesis20))
 
 r = cor(synthesis$synthesis20, synthesis$synthesis60)
@@ -22,4 +22,4 @@ p + geom_point(alpha = 0.5) +
   xlab(paste("20 min in galactose","synthesis rate [mRNA/cell/min]", sep = "\n"))+
   ylab(paste("60 min in galactose","synthesis rate [mRNA/cell/min]", sep = "\n")) +
   ggtitle(paste0("r = ", round(r, digits = 2)))
-ggsave("figures/panels/figSa/synthesis_60_vs20_min.pdf", width = 6, height = 6, units = "cm")
+ggsave("figures/panels/figS3/synthesis_60_vs20_min.pdf", width = 6, height = 6, units = "cm")

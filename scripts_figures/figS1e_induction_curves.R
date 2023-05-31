@@ -2,19 +2,24 @@ rm(list = ls())
 
 library(tidyverse)
 
-# upload western blots
+# upload 0-1 normalized HA/Myc ratios as measured by western blotting
+# along with Hill fit parameters 
 western = read.csv("data/westerns.csv")
 westernFits = read.csv("data/westerns_fitParam.csv")
 
+# relevel labels for plotting
 western$factorName = factor(western$factorName, levels = c("TBP", "TFIIA", "TFIIB", 
                                                            "TFIIF", "TFIIE"))
+# make labels for legend
 westernLabels = westernFits %>% 
   mutate(myLabel = paste0(factorName,", n=", round(n_western, digits = 2),  " ,t[1/2]ind=", round(Km_western, digits = 2)))
 rownames(westernLabels) = westernLabels$factorName
 
 myLabels =westernLabels[c("TBP", "TFIIA", "TFIIB", "TFIIF", "TFIIE"), "myLabel"]
+# hard set maximum saturation to 1
 Wmax = 1
 colorPalette = c("#F2C249", "#E6772E", "#3D4C53", "#4DB3B3", "#E64A45")
+#plot
 p = ggplot(western, aes(x = time, y = ratio, color = factorName))
 p + geom_smooth(aes(group = factorName),
                 method="nls",
@@ -42,4 +47,4 @@ p + geom_smooth(aes(group = factorName),
   geom_errorbar(aes(ymin=ratio-ratio_sd, ymax=ratio+ratio_sd), 
                 position=position_dodge(0.05)) +
   facet_wrap(~factorName, nrow = 1)
-ggsave("figures/panels/figS1/inductionCurves.pdf", width = 21, height = 4.5, units = "cm")
+#ggsave("figures/panels/figS1/inductionCurves.pdf", width = 21, height = 4.5, units = "cm")

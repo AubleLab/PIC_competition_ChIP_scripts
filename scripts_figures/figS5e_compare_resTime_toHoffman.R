@@ -14,8 +14,8 @@ plotResTime = resTimes %>%
   mutate(resTimesNum = ifelse(resTime == "<1", randNum, as.numeric(resTime))) %>% 
   dplyr::select(gene, factorName, resTimesNum) 
 
-# upload Liz's data
-Liz = read.csv("/Users/lilcrusher/competitionChIP/Liz_tHalf_estimates/Liz_estimates.csv") %>% 
+# upload Hoffman data
+Liz = read.csv("data/previously_published/Hoffman_TBP_estimates.csv") %>% 
   dplyr::select(-X) %>% 
   mutate(Liz = as.numeric(resTime)) %>% 
   select(-resTime)
@@ -33,16 +33,7 @@ compareResTime = plotResTime %>%
   distinct() %>% 
   inner_join(Liz)
 # 
-# p = ggplot(compareResTime, aes(x = resTimesNum, y = Liz, color = factorName))
-# p + geom_point(size = 2) +
-#   theme_bw() +
-#   facet_wrap(~method) +
-#   geom_vline(xintercept = 1, linetype = "dashed")+
-#   geom_label_repel(aes(label = geneSys),
-#                    box.padding   = 0.35,
-#                    point.padding = 0.5,
-#                    segment.color = 'grey50')
-# ggsave("figures/panels/random/compare_to_Liz.pdf", width = 6, height = 3)
+
 
 p = ggplot(compareResTime %>% dplyr::filter(method == "CLKv2"), 
            aes(x = resTimesNum, y = Liz, color = factorName, fill = factorName))
@@ -66,6 +57,5 @@ p + geom_vline(xintercept = 1, linetype = "dashed", color = "grey70") +
         strip.background = element_rect(fill = NA),
         text = element_text(size=9), 
         legend.position = "none")
-ggsave("figures/panels/figSc/compare_to_Liz.pdf", width = 5.5, 
-       height = 5.5, units = "cm")
+ggsave("figures/panels/figS5/compare_to_Liz.pdf", width = 5.5, height = 5.5, units = "cm")
 

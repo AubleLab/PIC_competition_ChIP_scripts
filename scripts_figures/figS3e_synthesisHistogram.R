@@ -21,4 +21,4 @@ p + geom_histogram(bins = 25,color = "#CF3721", fill = "#CF3721", alpha = 0.9) +
         legend.position = "top",
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank())
-ggsave("figures/panels/figSa/synthesisRates_hist.pdf", width = 5, height = 4, units = "cm")
+#ggsave("figures/panels/figS3/synthesisRates_hist.pdf", width = 5, height = 4, units = "cm")

@@ -108,7 +108,7 @@ p + geom_point(color = "grey60", alpha = 0.3)+
   #ylim(-0.7, 0.2) +
   geom_hline(yintercept = 0, lwd = 1) + 
   xlab("mean of normalized counts") + 
-  ylab(expression(paste(log[2],"(fold-change)", " 60 vs.20 min"))) +
+  ylab(expression(paste(log[2],"(fold change)", " 60 vs.20 min"))) +
   theme(panel.background = element_rect(fill = "transparent"), # bg of the panel
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=10),
@@ -117,6 +117,6 @@ p + geom_point(color = "grey60", alpha = 0.3)+
   geom_text(data = plotText, aes(x = 20000, y = -7, label = paste0("down = ", sigDown)), color = "#E64A45") +
   ylim(-7, 7) +
   facet_wrap(~fraction)
-ggsave("figures/panels/figSa/MAplots_60_vs20_min.pdf", width = 15, height = 6, units = "cm")
+#ggsave("figures/panels/figS3/MAplots_60_vs20_min.pdf", width = 15, height = 6, units = "cm")
 
 

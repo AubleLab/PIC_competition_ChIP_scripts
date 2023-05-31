@@ -2,7 +2,7 @@ rm(list = ls())
 library(tidyverse)
 
 # 1) =====================================================================================
-# upload count tables (I will take data in this raw form and normalized in way that
+# upload normalized count tables with HA/Myc ratios (I will take data in this raw form and normalize in a way that
 # all end at 1)
 countFiles = list.files("data//normalized_count_tables", pattern = ".txt", full.names = T)
 
@@ -47,7 +47,7 @@ rm(list = setdiff(ls(), "finalCountTable"))
 # 2) =====================================================================================
 # upload fits
 # first upload my fit files
-fitFiles = list.files("/Users/lilcrusher/competitionChIP/Hill_fits_different_approaches", full.names = T, pattern = "*fullTableWithFits.csv")
+fitFiles = list.files("data/Hill_fits/", full.names = T, pattern = "*fullTableWithFits.csv")
 for (i in fitFiles){
   fitTable = read.csv(i)
   
@@ -144,6 +144,7 @@ textLabels$factorName = factor(textLabels$factorName, levels = c("TBP", "TFIIA",
 
 
 colorPalette = c("#E29930", "#217CA3","#32384D")
+#plot
 p = ggplot(plotSample, aes(x = time, y = normCount_ends1/Vmax_nls, color = timeGroup))
 p  + theme_bw() +
   ylab("HA/Myc") +
@@ -171,36 +172,6 @@ p  + theme_bw() +
   geom_text(data = textLabels, x = 80, y = 0.05, 
             aes(label = myLabels), size = 2.5)
 ggsave("figures/panels/figS1/example fits.pdf", width = 17, height = 11, units = "cm")
-
-# t =plotSample %>% 
-#   dplyr::select(gene, factorName) %>% 
-#   distinct() %>% 
-#   filter(factorName == "TBP")
-# write.csv(t, "data/genes_for_fits/TBP.csv", row.names = F)
-# 
-# a =plotSample %>% 
-#   dplyr::select(gene, factorName) %>% 
-#   distinct() %>% 
-#   filter(factorName == "TFIIA")
-# write.csv(a, "data/genes_for_fits/TFIIA.csv", row.names = F)
-# 
-# b =plotSample %>% 
-#   dplyr::select(gene, factorName) %>% 
-#   distinct() %>% 
-#   filter(factorName == "TFIIB")
-# write.csv(b, "data/genes_for_fits/TFIIB.csv", row.names = F)
-# 
-# e =plotSample %>% 
-#   dplyr::select(gene, factorName) %>% 
-#   distinct() %>% 
-#   filter(factorName == "TFIIE")
-# write.csv(e, "data/genes_for_fits/TFIIE.csv", row.names = F)
-# 
-# f =plotSample %>% 
-#   dplyr::select(gene, factorName) %>% 
-#   distinct() %>% 
-#   filter(factorName == "TFIIF")
-# write.csv(f, "data/genes_for_fits/TFIIF.csv", row.names = F)
 
 
 
