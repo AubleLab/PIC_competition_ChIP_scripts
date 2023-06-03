@@ -15,9 +15,9 @@ plotResTime = resTimes %>%
   dplyr::select(gene, factorName, resTimesNum) 
 
 # upload Hoffman data
-Liz = read.csv("data/previously_published/Hoffman_TBP_estimates.csv") %>% 
+Hoffman = read.csv("data/previously_published/Hoffman_TBP_estimates.csv") %>% 
   dplyr::select(-X) %>% 
-  mutate(Liz = as.numeric(resTime)) %>% 
+  mutate(Hoffman = as.numeric(resTime)) %>% 
   select(-resTime)
 
 
@@ -31,12 +31,12 @@ geneConvertTable = read.delim("/Users/lilcrusher/annotations/yeast/dbxref.tab", 
 compareResTime = plotResTime %>% 
   left_join(geneConvertTable) %>% 
   distinct() %>% 
-  inner_join(Liz)
+  inner_join(Hoffman)
 # 
 
 
 p = ggplot(compareResTime %>% dplyr::filter(method == "CLKv2"), 
-           aes(x = resTimesNum, y = Liz, color = factorName, fill = factorName))
+           aes(x = resTimesNum, y = Hoffman, color = factorName, fill = factorName))
 p + geom_vline(xintercept = 1, linetype = "dashed", color = "grey70") + 
   geom_point(size = 2) +
   theme_classic() + 
@@ -57,5 +57,5 @@ p + geom_vline(xintercept = 1, linetype = "dashed", color = "grey70") +
         strip.background = element_rect(fill = NA),
         text = element_text(size=9), 
         legend.position = "none")
-ggsave("figures/panels/figS5/compare_to_Liz.pdf", width = 5.5, height = 5.5, units = "cm")
+#ggsave("figures/panels/figS10/compare_to_Hoffman.pdf", width = 5.5, height = 5.5, units = "cm")
 

@@ -45,5 +45,5 @@ p + geom_point(alpha = 0.5, size = 1) +
         legend.position = "none") +
   scale_color_manual(values = colorPalette)
 
-#ggsave("figures/panels/figSc/TBP_vs_Zaidi_density.pdf", width = 5.5, height = 5.5, units = "cm")
+#ggsave("figures/panels/figS10/TBP_vs_Zaidi_density.pdf", width = 5.5, height = 5.5, units = "cm")
 

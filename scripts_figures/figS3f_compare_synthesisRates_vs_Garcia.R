@@ -34,7 +34,7 @@ p + geom_bin2d(bins = 50) +
   theme(panel.background = element_rect(fill = "transparent", color = "black"), # bg of the panel
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=9), legend.position = "top") 
-#ggsave("figures/panels/figS5/synthesisRates_vs_publised_density.pdf", width = 5.5, height = 5.5, units = "cm")
+#ggsave("figures/panels/figS2/synthesisRates_vs_publised_density.pdf", width = 5.5, height = 5.5, units = "cm")
 
 
 
