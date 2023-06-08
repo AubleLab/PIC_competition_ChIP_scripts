@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # the script maps all fastq files within a folder to hg19, removes unmapped reads
 # outputs are sorted and indexed indexed BAM files
 
