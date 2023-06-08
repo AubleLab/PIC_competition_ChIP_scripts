@@ -16,12 +16,15 @@ index must be changed to the local path to the sacCer3 index!!!
 After running `peakCalling.sh` script you will be asked following questions:
 
 *What is the name of the experimental dataset?*
+
 Provide full path to the BAM file from which you want to call peaks.
 
 *What is the name of the control dataset?*
+
 Provide full path to the BAM file from control input.
 
 *What prefix would you like added to the output files?*
+
 Provide name you want for your peak files.
 
 ## Estimate residence times
@@ -34,7 +37,9 @@ The final results from the fitting can be found in */data/time_estimates_first_i
 
 ### 2. Additional reliably fast sites
 
-All sites are first fitted with Hill equation using `fit_allGTF.R` script. Results created with this script match the results placed in the */data/Hill_fits* folder. The script `additioanlFastSites.R` takes all the Hill fits (skips all the genes/sites that were reliably fitted in the first iteration) and identifies sites with delta Km (difference in estimated half-lives between fitted Western blots and competition ChIP) smaller than 2. The list of these sites, which we all classify as < 1min is then placed to / can be found in */data/time_estimates_second_iter/additionalFastSites.csv*. s
+All sites are first fitted with Hill equation using `fit_allGTF.R` script. Results created with this script match the results placed in the */data/Hill_fits* folder. The script `additioanlFastSites.R` takes all the Hill fits (skips all the genes/sites that were reliably fitted in the first iteration) and identifies sites with delta Km (difference in estimated half-lives between fitted Western blots and competition ChIP) smaller than 2. The list of these sites, which we all classify as < 1min is then placed to / can be found in */data/time_estimates_second_iter/additionalFastSites.csv*.
+
+**All final residence time estimates can be found in /data/residence_times_all.csv**
 
 
 ## Scripts and data to create figures
