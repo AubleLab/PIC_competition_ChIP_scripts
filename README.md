@@ -28,9 +28,11 @@ Provide name you want for your peak files.
 
 The scripts for estimating residence times are placed in the folder */scripts_residenceTimeEstimates*. The scripts are using normalized count tables that are placed in the folder */data/normalized_count_tables*, normalized Western blotting measurements placed from */data/westerns.csv* or alternatively already fitted data from Western blotting: */data/westerns_fitParam.csv*.
 
-**Stefan Scripts**
+### 1. Residence time estimated using differential equations
 
 ### 2. Additional reliably fast sites
+
+All sites are first fitted with Hill equation using `fit_allGTF.R` script. Results created with this script match the results placed in the */data/Hill_fits* folder. 
 
 
 ## Scripts and data to create figures
