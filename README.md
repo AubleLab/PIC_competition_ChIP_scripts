@@ -25,7 +25,13 @@ Provide full path to the BAM file from control input.
 Provide name you want for your peak files.
 
 ## Estimate residence times
+
+The scripts for estimating residence times are placed in the folder */scripts_residenceTimeEstimates*. The scripts are using normalized count tables that are placed in the folder */data/normalized_count_tables*, normalized Western blotting measurements placed from */data/westerns.csv* or alternatively already fitted data from Western blotting: */data/westerns_fitParam.csv*.
+
 **Stefan Scripts**
+
+### 2. Additional reliably fast sites
+
 
 ## Scripts and data to create figures
 
