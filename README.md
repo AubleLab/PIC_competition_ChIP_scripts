@@ -32,4 +32,4 @@ Provide name you want for your peak files.
 All R scripts for analysis of preprocessed files are in the */scripts_figures* folder. These rely on data placed in the */data* folder. Each script name starts with a prefix indicating the figure and panel name in the manuscript. Before running the scripts set the working directory path to the global *PIC_competition_ChIP_scripts* directory.
 
 
-## ___________________NASCENT RNA-SEQ___________________
+## ___________________ NASCENT RNA-SEQ ___________________
