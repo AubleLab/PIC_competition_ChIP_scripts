@@ -30,9 +30,11 @@ The scripts for estimating residence times are placed in the folder */scripts_re
 
 ### 1. Residence time estimated using differential equations
 
+The final results from the fitting can be found in */data/time_estimates_first_iter* folder.
+
 ### 2. Additional reliably fast sites
 
-All sites are first fitted with Hill equation using `fit_allGTF.R` script. Results created with this script match the results placed in the */data/Hill_fits* folder. 
+All sites are first fitted with Hill equation using `fit_allGTF.R` script. Results created with this script match the results placed in the */data/Hill_fits* folder. The script `additioanlFastSites.R` takes all the Hill fits (skips all the genes/sites that were reliably fitted in the first iteration) and identifies sites with delta Km (difference in estimated half-lives between fitted Western blots and competition ChIP) smaller than 2. The list of these sites, which we all classify as < 1min is then placed to / can be found in */data/time_estimates_second_iter/additionalFastSites.csv*. s
 
 
 ## Scripts and data to create figures
