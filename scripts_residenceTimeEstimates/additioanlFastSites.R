@@ -133,7 +133,8 @@ fastFits = myFits %>%
   dplyr::filter(delta_Km < 2) %>% 
   full_join(iterOneFits) %>% 
   dplyr::filter(is.na(resTime)) %>% 
-  dplyr::select(peakName, gene, factorName)
+  dplyr::select(peakName, gene, factorName) %>% 
+  distinct()
 #write.csv(fastFits,"data/time_estimates_second_iter/additionalFastSites.csv", quote = F, row.names = F)
 
 
