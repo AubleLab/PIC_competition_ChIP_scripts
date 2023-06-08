@@ -53,11 +53,11 @@ All R scripts for analysis of preprocessed files are in the */scripts_figures* f
 
 The scripts for mapping the paired-end reads from RNA-seq are here: */scripts_preprocessing_RNA*.
 
-## 1. Map to *S. cerevisiae*
+### 1. Map to *S. cerevisiae*
 
 Change line 7 in `map_RNA_Scerevisiae.sh` to path pointing to the local sacCer3 hisat2 index file. After that run the script within folder containing folders with fastq.gz files - for each sample have a separate folder. BAM alignment files are created.  
 
-## 2. Map to *S. pombe* - used for normalization
+### 2. Map to *S. pombe* - used for normalization
 
 Change line 7 in `map_RNA_Spombe.sh` to path pointing to the local sacCer3 hisat2 index file. After that run the script within folder containing folders with fastq.gz files - for each sample have a separate folder. BAM alignment files are created.
 
