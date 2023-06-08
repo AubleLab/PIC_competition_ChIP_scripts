@@ -1,2 +1,2 @@
-# PIC_competition_ChIP_scripts
- Scripts accompanying PIC competition ChIP-seq manuscript 
+# Genome-scale chromatin interaction dynamic measurements for key components of the RNA Pol II general transcription machinery
+Scripts accompanying manuscript
