@@ -2,7 +2,7 @@
 
 ### - Scripts accompanying manuscript
 
-## ___________________COMPETITION CHIP___________________
+## ___________________ COMPETITION CHIP ___________________
 
 ## Few preprocessing steps
 
