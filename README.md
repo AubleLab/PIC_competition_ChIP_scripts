@@ -2,6 +2,8 @@
 
 ### - Scripts accompanying manuscript
 
+## ___________________COMPETITION CHIP___________________
+
 ## Few preprocessing steps
 
 Scripts for mapping raw reads to *sacCer3* index and peak calling are placed in the */scripts_preprocessing* folder.
