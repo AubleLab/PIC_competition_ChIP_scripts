@@ -67,3 +67,9 @@ Change line 7 in `map_RNA_Scerevisiae.sh` to path pointing to the local sacCer3 
 Change line 7 in `map_RNA_Spombe.sh` to path pointing to the local sacCer3 hisat2 index file. After that run the script within folder containing folders with fastq.gz files - for each sample have a separate folder. BAM alignment files are created.
 
 ### 3. Count tables
+
+To create a count table with raw counts, use script `create_count_table.R`. In the script based on the location in your local settings, change path pointing to *S. cerevisiae* BAM files (line 7), and *S. cerevisiae* FASTA file (line 27). The final raw counts are also available here: *data/RNA_count_tables/countCerevisiae_genes_minusStranded.csv*.
+
+Normalized count table used for DTA analysis (only samples with thiouracil added) can be created with `count_table_for_DTA.R` script. The final count table is available here: */data/RNA_count_tables/countCerevisiae_genes_minusStranded__ThiouracilYESonly_pombeNormalized.csv*
+
+## Estimating synthesis rates
