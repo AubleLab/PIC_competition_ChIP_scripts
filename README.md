@@ -2,6 +2,10 @@
 
  Scripts accompanying manuscript
 
+## ___________________ RECREATE FIGURES ___________________
+
+The R scripts to recreate all the figures from the manuscript can be found in */scripts_figures* folder. The prefix in the name of the script indicates figure and panel number. All the necessary preprocessed files can be found in the */data* folder (all scripts point to appropriate file within the folder and do not need path changing, when working directory is set to the main folder). 
+
 ## ___________________ COMPETITION CHIP ___________________
 
 ## Few preprocessing steps
@@ -73,3 +77,7 @@ To create a count table with raw counts, use script `create_count_table.R`. In t
 Normalized count table used for DTA analysis (only samples with thiouracil added) can be created with `count_table_for_DTA.R` script. The final count table is available here: */data/RNA_count_tables/countCerevisiae_genes_minusStranded__ThiouracilYESonly_pombeNormalized.csv*
 
 ## Estimating synthesis rates
+
+The scripts for RNA synthesis rates estimates from count tables are here: */scripts_RNA_synthesisRatesEstimates*.
+
+To calculate synthesis rates from both 20 min and 60 min post galactose time points together, use `DTA_analysis.R`. To calculate synthesis rates for each time point, use `DTA_analysis_dynamic.R`.

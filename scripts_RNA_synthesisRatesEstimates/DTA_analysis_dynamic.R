@@ -11,12 +11,11 @@ countTable = read.csv("data/RNA_count_tables/countCerevisiae_genes_minusStranded
 metadata = read.csv("data/metadata.csv") %>% 
   filter(added_4sU == "+") %>% 
   dplyr::rename(name = sampleNames) %>% 
-  mutate(time = 6) 
+  mutate(time = 6) %>% 
+  mutate(timeframe = paste0("00-", as.character(timeInGal))) %>% 
+  mutate(timecourse = ifelse(timeInGal == 20, 1, 2))
 rownames(metadata) = metadata$name
 metadata$nr = rep(c(1,2,3,4), 3)
-
-# make sure the samples are in the same order
-countTable = countTable[, rownames(metadata)]
 
 # there cannot be any zero counts in the matrix - let's filter those genes out
 zeroSum = rowSums(countTable == 0)
@@ -26,29 +25,38 @@ countTable_nonZero = countTable[names(zeroSum),]
 
 # create list of reliable genes - all genes left
 # reformat metadata and count table to fit the DTA function
-reliable_DTA = rownames(countTable_nonZero)
 metadata_DTA = as.matrix(metadata)
-countTable_DTA = as.matrix(countTable_nonZero)
+reliable_DTA_plusOne = rownames(countTable_nonZero)
+countTable_DTA_plusOne = as.matrix(countTable_nonZero)
 
-
-# use method bias to estimate LtoT ratio
-res_DTA = DTA.estimate(phenomat = metadata_DTA,
-                       datamat = countTable_DTA,
+res_DTA = DTA.dynamic.estimate(phenomat = metadata_DTA,
+                       datamat = countTable_DTA_plusOne,
                        tnumber = Sc.tnumber, 
                        check = T,
-                       ccl = 150,
-                       mRNAs = 60000,
-                       reliable = reliable_DTA, folder = "data/figures",
-                       condition = "real_data",save.plots = TRUE,notinR = TRUE, 
+                       ccl = 150,mRNAs = 60000,
+                       reliable = reliable_DTA_plusOne,
+                       condition = "real_data",save.plots = TRUE,
+                       notinR = TRUE,folder = "data/figures", 
                        ratiomethod = "bias")
-
-resList = res_DTA$`6`
+# extract 20 min results
+resList = res_DTA$`1`
 
 # extract gene names and synthesis rates (divide by 150 to make the result
 # per minute not per cell cycle)
-synthesis = resList$sr / 150
+synthesis = resList$sr
 genes = names(synthesis)
 
-# create final table with synthesis rates - these need to be divided by 
-resTable = data.frame(gene = genes, synthesis)
-#write.csv(resTable, paste0("data/DTA_results.csv"))
+resTable20 = data.frame(gene = genes,
+                        synthesis20 = synthesis/150)
+
+# extract 60 min results
+resList = res_DTA$`2`
+
+synthesis = resList$sr
+genes = names(synthesis)
+
+resTable = data.frame(gene = genes, 
+                      synthesis60 = synthesis/150) %>% 
+  full_join(resTable20)
+
+# write.csv(resTable, "data/synthesisRates_60_vs_20_min.csv")
