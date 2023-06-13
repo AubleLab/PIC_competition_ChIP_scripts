@@ -4,7 +4,7 @@
 
 ## ___________________ RECREATE FIGURES ___________________
 
-The R scripts to recreate all the figures from the manuscript can be found in */scripts_figures* folder. The prefix in the name of the script indicates figure and panel number. All the necessary preprocessed files can be found in the */data* folder (all scripts point to appropriate file within the folder and do not need path changing, when working directory is set to the main folder). 
+The R scripts to recreate all the figures from the manuscript can be found in */scripts_figures* folder. The prefix in the name of the script indicates figure and panel number. All the necessary preprocessed files can be found in the */data* folder (all scripts point to appropriate file within the folder and do not need path changing, when working directory is set to the main folder).
 
 ## ___________________ COMPETITION CHIP ___________________
 
