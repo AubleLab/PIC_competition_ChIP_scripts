@@ -85,7 +85,7 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.5),
         legend.position = "none") +
   scale_fill_manual(values= c("#E29930", "#217CA3")) +
   scale_color_manual(values= c("#E29930", "#217CA3")) + 
-  stat_compare_means(method = "t.test", label = "p.signif", label.y = 150)
+  stat_compare_means(label.y = 150)
 #ggsave("figures/panels/figS8/Rap1_vs_TFIIFlong_short.pdf", width = 2.8, height = 6, units = "cm")
 
 
