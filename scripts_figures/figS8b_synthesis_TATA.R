@@ -36,7 +36,7 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.3),
   scale_fill_manual(values= c("#F5BE41", "#31A9B8")) +
   scale_color_manual(values= c("#F5BE41", "#31A9B8")) +
   ylim(0,1.6) + 
-  stat_compare_means(method = "t.test", label = "p.signif", label.y = 1.6)
+  stat_compare_means(label.y = 1.6)
 #ggsave("figures/panels/figS8/synthesis_vs_TATA.pdf", width = 2.8, height = 6, units = "cm")
 
 

@@ -44,7 +44,27 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.3),
   #facet_wrap(~factorName, scales = "free", nrow = 1) +
   scale_fill_manual(values= c("#F5BE41", "#31A9B8")) +
   scale_color_manual(values= c("#F5BE41", "#31A9B8")) +
-  ylim(0,20) + stat_compare_means(method = "t.test", label = "p.signif", label.y = 20)
-#ggsave("figures/panels/figS8/resTime_vs_TATA.pdf", width = 6, height = 6, units = "cm")
+  ylim(0,20) 
+ggsave("figures/panels/figS8/resTime_vs_TATA.pdf", width = 6, height = 6, units = "cm")
 
+# to do Wilcoxon's test
+p = ggplot(plotResTime, aes(x = TATA_class, y = resTimesNum, fill = TATA_class))
+p + geom_point(position=position_jitterdodge(jitter.width = 0.3), 
+               aes(color = TATA_class), alpha = 0.5) + 
+  geom_boxplot(outlier.shape=NA) +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey70") + 
+  theme_classic() +
+  xlab(" ") +
+  ylab("residence time [min]") +
+  theme(panel.background = element_rect(fill = "transparent"), # bg of the panel
+        plot.background = element_rect(fill = "transparent", color = NA),
+        text = element_text(size=9),
+        legend.position = "top",
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank()) +
+  #facet_wrap(~factorName, scales = "free", nrow = 1) +
+  scale_fill_manual(values= c("#4DB3B3", "#E64A45")) +
+  scale_color_manual(values= c("#4DB3B3", "#E64A45")) +
+  ylim(0,20) + stat_compare_means(label.y = 20) +
+  facet_wrap(~factorName)
 
