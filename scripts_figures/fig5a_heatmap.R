@@ -57,7 +57,7 @@ synthesis_col = colorRamp2(c(min(synthesisPlot, na.rm = TRUE),
                      magma(n = 5, direction = -1)[c(1,3,5)])
 row_ha = rowAnnotation(synthesis = synthesisPlot, col = list(synthesis = synthesis_col))
 # plot - ward clustering shows the best results + k-means clustering
-pdf(file = "figures/panels/fig6/heatmap.pdf", width = 3, height = 4)
+
 Heatmap(zHeatmap, 
         cluster_columns = F, 
         clustering_method_rows = "ward.D", 
@@ -65,7 +65,7 @@ Heatmap(zHeatmap,
         row_split = 10,
         row_gap = unit(1.5, "mm"), border = T, col = col_fun)#,
         #right_annotation = row_ha)
-dev.off()
+
 
 # extract the gene names for each cluster
 ht = Heatmap(zHeatmap, 

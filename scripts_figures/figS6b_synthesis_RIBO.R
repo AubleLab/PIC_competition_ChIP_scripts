@@ -43,6 +43,5 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.3),
   scale_color_manual(values= c("#4DB3B3", "#E64A45")) +
   ylim(0,1.6) + 
   stat_compare_means(label.y = 1.6)
-#ggsave("figures/panels/figS6/synthesis_vs_RIBO.pdf", width = 2.8, height = 6, units = "cm")
 
 

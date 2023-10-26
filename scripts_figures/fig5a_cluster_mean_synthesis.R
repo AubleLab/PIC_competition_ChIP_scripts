@@ -21,4 +21,3 @@ p + geom_bar(stat = "identity") +
         text = element_text(size=9)) +
   ylab("cluster number") +
   xlab(paste("mean synthesis rate", "[mRNA/cell/min]", sep = "\n"))
-#ggsave("figures/panels/fig6/meanSynthesis.pdf", width = 6, height = 8, units = "cm")

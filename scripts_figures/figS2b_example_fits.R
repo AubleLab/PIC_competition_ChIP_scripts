@@ -171,7 +171,6 @@ p  + theme_bw() +
   xlab("time [min]") +
   geom_text(data = textLabels, x = 80, y = 0.05, 
             aes(label = myLabels), size = 2.5)
-ggsave("figures/panels/figS1/example fits.pdf", width = 17, height = 11, units = "cm")
 
 
 

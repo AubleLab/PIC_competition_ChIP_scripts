@@ -64,7 +64,6 @@ p +geom_point() +
   theme(panel.background = element_rect(fill = "transparent"), # bg of the panel
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=9))
-#ggsave("figures/panels/figS7/compare_shortTFIIF_gProfiler_and_myEnrichmnet.pdf", width = 5, height = 5, units = "cm")
 
 
 # upload pathway results from g:Profiler (get maximum top 5 from each database)
@@ -90,4 +89,3 @@ p + geom_bar(stat= "identity") +
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=9),
         axis.text=element_text(size=8), legend.position = "top") 
-#ggsave("figures/panels/figS7/TFIIF_shortLived_gProfiler.pdf", width = 9, height = 7, units = "cm")

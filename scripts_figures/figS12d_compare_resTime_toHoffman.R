@@ -57,5 +57,5 @@ p + geom_vline(xintercept = 1, linetype = "dashed", color = "grey70") +
         strip.background = element_rect(fill = NA),
         text = element_text(size=9), 
         legend.position = "none")
-#ggsave("figures/panels/figS10/compare_to_Hoffman.pdf", width = 5.5, height = 5.5, units = "cm")
+
 

@@ -117,6 +117,4 @@ p + geom_point(color = "grey60", alpha = 0.3)+
   geom_text(data = plotText, aes(x = 20000, y = -7, label = paste0("down = ", sigDown)), color = "#E64A45") +
   ylim(-7, 7) +
   facet_wrap(~fraction)
-#ggsave("figures/panels/figS3/MAplots_60_vs20_min.pdf", width = 15, height = 6, units = "cm")
-
 

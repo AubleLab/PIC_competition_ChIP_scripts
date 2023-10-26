@@ -65,4 +65,3 @@ p + geom_bar(stat = "identity") +
   scale_fill_gradientn(colors = c("#32384D", "white","#E29930"), 
                        limits= c(-1,1)) +
   ylim(-1, 1)
-#ggsave("figures/panels/fig3/cor_PC_genes_with_resTime.pdf", width = 15, height = 5, units = "cm")

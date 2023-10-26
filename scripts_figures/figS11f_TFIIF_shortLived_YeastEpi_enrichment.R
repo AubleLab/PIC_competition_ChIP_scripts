@@ -89,7 +89,6 @@ p + geom_bar(stat = "identity") +
   xlab(expression(paste(-log[10],"(FDR)")))+
   ylab("")
 #theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-#ggsave("figures/panels/figS7/TFIIF_shortLived_myEnrichment.pdf", height =2, width = 6, units = "cm")
 
 sigRes = resultTable %>% dplyr::filter(FDR<0.05) #%>% 
   # dplyr::filter(!str_detect(TF, "^Taf")) %>% 
@@ -104,5 +103,4 @@ sigRes = resultTable %>% dplyr::filter(FDR<0.05) #%>%
   # dplyr::filter(!str_detect(TF, "^Kin28")) %>% 
   # dplyr::filter(!str_detect(TF, "^Rpb")) %>% 
   # dplyr::filter(!str_detect(TF, "^Bdf2"))
-#write.csv(sigRes,"data/analysis/short_TFIIF/sigTFenrichment.csv")
 

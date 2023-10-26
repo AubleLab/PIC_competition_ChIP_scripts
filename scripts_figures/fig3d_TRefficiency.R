@@ -39,7 +39,6 @@ p + geom_violin() +
   scale_color_manual(values = colorPalette) +
   scale_fill_manual(values = colorPalette) +
   stat_summary(fun=median, geom="point", shape=16, size=1)
-ggsave("figures/panels/fig3/TR_efficiency.pdf", width = 6, height = 4, units = "cm")
 
 mean_and_median = resTimes %>% 
   mutate(randNum = runif(nrow(resTimes), min=0, max=1)) %>% 

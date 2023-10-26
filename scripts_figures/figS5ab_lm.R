@@ -85,7 +85,6 @@ p + geom_bar(stat = "identity", position = "dodge") +
   xlab("") +
   geom_hline(yintercept = 0) +
   ylim(-0.1, 0.07)
-#ggsave("figures/panels/figS5/lm_beta_singleParam.pdf", width = 6, height = 4, units = "cm")
 
 # plot betas from combined model
 p = ggplot(plotModel %>% dplyr::filter(type == "combined"), aes(x = factorName, y = beta, fill = factorName))
@@ -105,4 +104,3 @@ p + geom_bar(stat = "identity", position = "dodge") +
   xlab("") +
   geom_hline(yintercept = 0)+
   ylim(-0.1, 0.07)
-ggsave("figures/panels/figS5/lm_beta_combinedParam.pdf", width = 6, height = 4, units = "cm")

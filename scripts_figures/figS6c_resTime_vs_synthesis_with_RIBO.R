@@ -61,6 +61,5 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.3),
   scale_color_brewer(palette = "Reds") +
   ylim(0,20) +
   facet_wrap(~ribo, nrow = 1)
-ggsave("figures/panels/figS6/boxplots_res_time_vs_synthesis_withRIBO.pdf", width = 17, height = 6, units = "cm")
 
 

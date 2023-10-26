@@ -127,5 +127,4 @@ p + geom_bar(stat= "identity", color = "grey80") +
   #scale_x_discrete(breaks=plotRes$combo,
    #                labels=plotRes$TF) +
   facet_wrap(~GTFlabel, scales = "free_x", ncol = 1)
-ggsave("figures/panels/figS7/myTFenrichment_longTFIIF.pdf", width = 17, height = 10, units = "cm")
 

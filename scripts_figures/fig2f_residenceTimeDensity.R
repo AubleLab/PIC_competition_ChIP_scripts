@@ -29,4 +29,3 @@ p + geom_density(alpha = 0.8, lwd = 1) +
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=10)) +
   geom_vline(xintercept = 1, color = "grey40", linetype = "dashed")
-#ggsave("figures/panels/fig2/resTime_density.pdf", width = 17, height = 4, units = "cm")

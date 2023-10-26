@@ -75,4 +75,3 @@ p + geom_point(size=6, alpha = 0.7, shape = 21, stroke = 1) +
         legend.position = "top",
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank())
-#ggsave("figures/panels/figS3/PCA.pdf", width = 13, height = 6, units = "cm")

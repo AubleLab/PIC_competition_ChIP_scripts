@@ -22,4 +22,3 @@ p + geom_point(alpha = 0.5) +
   xlab(paste("20 min in galactose","synthesis rate [mRNA/cell/min]", sep = "\n"))+
   ylab(paste("60 min in galactose","synthesis rate [mRNA/cell/min]", sep = "\n")) +
   ggtitle(paste0("r = ", round(r, digits = 2)))
-ggsave("figures/panels/figS3/synthesis_60_vs20_min.pdf", width = 6, height = 6, units = "cm")

@@ -37,4 +37,3 @@ p + geom_smooth(aes(group = factorName),
         legend.background = element_rect(fill = "transparent")) +
   geom_hline(yintercept = 0.5) +
   xlab("time [min]")
-#ggsave("figures/panels/fig2/inductionCurves.pdf", width = 10, height = 4.5, units = "cm")

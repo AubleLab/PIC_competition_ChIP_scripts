@@ -32,6 +32,4 @@ p + geom_bar(stat= "identity") +
         axis.text=element_text(size=8), legend.position = "top") + 
   facet_grid(rows = vars(cluster), scales = "free_y", space = "free_y") +
   scale_color_manual(values = c("grey50", "white"))
-#ggsave("figures/panels/fig5/myTFenrichment_clusters.pdf", width = 5, height = 10, units = "cm")
-#ggsave("figures/panels/fig5/myTFenrichment_clusters_legend.pdf", width = 10, height = 10, units = "cm")
 

@@ -57,7 +57,6 @@ p + geom_point(alpha = 0.2, color = "grey40") +
         panel.grid.minor = element_blank()) +
   xlab("residence time [min]") +
   ylab("residence time [min]") + coord_fixed()
-#ggsave("figures/panels/fig4/compare_resTimes_individual_factors.pdf", width = 14, height = 14, units = "cm")
 
 
   
@@ -81,7 +80,6 @@ p + geom_point(alpha = 0.2, color = "grey70") +
   ylab("residence time [min]") +
   scale_fill_viridis_c(option = "B", direction = -1)+
   coord_fixed()
-#ggsave("figures/panels/fig4/compare_resTimes_individual_factors_synthesisRate.pdf", width = 14, height = 14, units = "cm")
 
 
 

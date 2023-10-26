@@ -37,4 +37,3 @@ p + geom_smooth(method="nls",
   geom_errorbar(aes(ymin=ratio-ratio_sd, ymax=ratio+ratio_sd), 
                 position=position_dodge(0.05), color = "#E64A45") +
   ggtitle("TFIIE")
-#ggsave("figures/panels/fig2/TFIIE_inductionCurve.pdf", width = 5.2, height = 4.7, units = "cm")

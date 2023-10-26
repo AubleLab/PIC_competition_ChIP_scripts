@@ -22,5 +22,4 @@ p + geom_density(color = "black", alpha = 0.9) +
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank()) +
   scale_fill_brewer(palette = "Reds")
-#ggsave("figures/panels/fig3/synthesisRates_quartiles.pdf", width = 5, height = 4, units = "cm")
 

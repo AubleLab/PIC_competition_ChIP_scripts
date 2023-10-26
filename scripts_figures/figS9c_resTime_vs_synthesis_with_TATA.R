@@ -51,6 +51,5 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.3),
   scale_color_brewer(palette = "Reds") +
   ylim(0,20) +
   facet_wrap(~TATA_class, nrow = 1)
-ggsave("figures/panels/figS8/boxplots_res_time_vs_synthesis_withTATA.pdf", width = 17, height = 6, units = "cm")
 
 

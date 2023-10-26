@@ -56,7 +56,6 @@ variance = output$variance
 #         panel.grid.minor = element_blank(), 
 #         legend.position = "top") +
 #   guides(color = guide_colorbar(title = paste("synthesis rate", "[mRNA/cell/min]", sep = "\n")))
-# ggsave("figures/panels/fig4/PCA_genes.pdf", width = 7, height = 7, units = "cm")
 
 p = ggplot(plotData, aes(x = PC1, y = PC2, z = cropped))
 p + geom_point(alpha = 0.2, color = "grey70") +
@@ -78,4 +77,3 @@ p + geom_point(alpha = 0.2, color = "grey70") +
         panel.grid.minor = element_blank(), 
         legend.position = "top") +
   guides(fill= guide_colorbar(title = paste("mean synthesis rate", "[mRNA/cell/min]", sep = "\n")))
-#ggsave("figures/panels/fig3/PCA_genes_binned.pdf", width = 7, height = 6, units = "cm")

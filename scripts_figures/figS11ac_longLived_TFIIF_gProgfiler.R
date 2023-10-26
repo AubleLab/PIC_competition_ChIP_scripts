@@ -68,7 +68,6 @@ p + geom_bar(stat= "identity") +
   theme(panel.background = element_rect(fill = "transparent"), # bg of the panel
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=9))
-#ggsave("figures/panels/figS7/TFIIE_longLived_gProfiler.pdf", width = 7, height = 5, units = "cm")
 
 # upload pathway results from g:Profiler (get maximum top 5 from each database)
 pathways = read.csv("data/analysis/long_TFIIF/gProfiler.csv") %>% 
@@ -93,4 +92,3 @@ p + geom_bar(stat= "identity") +
         plot.background = element_rect(fill = "transparent", color = NA),
         text = element_text(size=9),
         axis.text=element_text(size=8), legend.position = "top") 
-#ggsave("figures/panels/figS7/TFIIF_longLived_gProfiler.pdf", width = 7, height = 7, units = "cm")

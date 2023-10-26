@@ -47,4 +47,3 @@ p + geom_smooth(aes(group = factorName),
   geom_errorbar(aes(ymin=ratio-ratio_sd, ymax=ratio+ratio_sd), 
                 position=position_dodge(0.05)) +
   facet_wrap(~factorName, nrow = 1)
-#ggsave("figures/panels/figS1/inductionCurves.pdf", width = 21, height = 4.5, units = "cm")

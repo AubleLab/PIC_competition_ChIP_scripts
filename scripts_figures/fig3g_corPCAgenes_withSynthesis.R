@@ -58,4 +58,3 @@ p + geom_bar(stat = "identity", color = "grey70", lwd = 0.3) +
   scale_fill_gradientn(colors = c("#32384D", "white","#E29930"), 
                        limits= c(-1,1)) +
   ylim(-1, 1)
-#ggsave("figures/panels/fig3/cor_PC_genes_with_SynthesisRate.pdf", width = 2.3, height = 3.6, units = "cm")

@@ -67,7 +67,6 @@ p + geom_bar(stat= "identity", color = "grey80", linewidth = 1) +
         text = element_text(size=9),
         axis.text=element_text(size=8), legend.position = "top") + 
   facet_grid(rows = vars(cluster), scales = "free_y", space = "free_y")
-#ggsave("figures/panels/fig6/transfac_clusters.pdf", width = 6, height = 8, units = "cm")
 
 # upload KEGG and WP results from g:Profiler
 pathways = resTable%>% 
@@ -94,5 +93,4 @@ p + geom_bar(stat= "identity") +
         axis.text=element_text(size=8), legend.position = "right", 
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   facet_grid(col = vars(cluster), scales = "free", space = "free")
-#ggsave("figures/panels/fig6/clusters_gProfiler.pdf", width = 15, height = 9, units = "cm")
 

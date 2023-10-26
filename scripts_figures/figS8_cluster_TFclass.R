@@ -37,6 +37,5 @@ p + geom_bar(stat= "identity", color = "grey80") +
   scale_x_discrete(breaks=plotRes$combo,
                      labels=plotRes$TF) +
   scale_y_continuous(breaks = scales::pretty_breaks(n = 1))
-#ggsave("figures/panels/figSf/myTFenrichment_clusters.pdf", width = 16, height = 10, units = "cm")
 
 

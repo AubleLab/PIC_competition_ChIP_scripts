@@ -49,5 +49,4 @@ p + geom_bar(stat = "identity", color = "grey80") +
   xlab(paste("median transcription efficiency", "[mRNA per binding event]", sep = "\n")) +
   labs(fill = paste("mean transcription efficiency", "[mRNA per binding event]", sep = "\n")) +
   facet_wrap(~factorName)
-#ggsave("figures/panels/fig5/meanTRefficiency_perCluster.pdf", width = 7, height = 8, units = "cm")
 

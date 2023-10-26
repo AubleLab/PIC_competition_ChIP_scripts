@@ -55,4 +55,3 @@ p + geom_point(size=4, shape = 21, stroke = 0.6, color = "grey50") +
         legend.position = "top") +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +
   guides(fill=guide_colorbar(title=paste("mean residence", "time [min]", sep = "\n"))) 
-#ggsave("figures/panels/figS4/PCA_factors_without_fastSites.pdf", width = 6, height = 7, units = "cm")

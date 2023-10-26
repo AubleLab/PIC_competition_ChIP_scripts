@@ -183,4 +183,3 @@ p  + theme_bw() +
   geom_text(data = textLabels %>% 
               dplyr::filter(factorName %in% c("TFIIF", "TFIIE")) , x = 90, y = 0.05, 
             aes(label = myLabels), size = 2.5)
-#ggsave("figures/panels/fig2/exampleFits.pdf", width = 11.5, height = 6, units = "cm")

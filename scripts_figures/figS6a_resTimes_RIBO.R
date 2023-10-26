@@ -49,7 +49,6 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.3),
   scale_fill_manual(values= c("#4DB3B3", "#E64A45")) +
   scale_color_manual(values= c("#4DB3B3", "#E64A45")) +
   ylim(0,20)
-#ggsave("figures/panels/figS6/resTime_vs_RIBO.pdf", width = 6, height = 6, units = "cm")
 
 # to do Wilcoxon's test
 p = ggplot(plotResTime, aes(x = ribo, y = resTimesNum, fill = ribo))

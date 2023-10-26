@@ -46,5 +46,4 @@ p + geom_point(alpha = 0.5) +
   scale_color_manual(values = colorPalette) +
   #geom_smooth(method = "lm", color = "black") +
   ylim(0, 1.7)
-#ggsave("figures/panels/figS5/resTime_vs_synthesisRate.pdf", width = 17, height = 4.5, units = "cm")
 

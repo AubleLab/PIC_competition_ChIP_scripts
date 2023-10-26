@@ -45,7 +45,6 @@ p + geom_point(position=position_jitterdodge(jitter.width = 0.3),
   scale_fill_manual(values= c("#F5BE41", "#31A9B8")) +
   scale_color_manual(values= c("#F5BE41", "#31A9B8")) +
   ylim(0,20) 
-ggsave("figures/panels/figS8/resTime_vs_TATA.pdf", width = 6, height = 6, units = "cm")
 
 # to do Wilcoxon's test
 p = ggplot(plotResTime, aes(x = TATA_class, y = resTimesNum, fill = TATA_class))
