@@ -2,9 +2,17 @@ rm(list = ls())
 
 library(tidyverse)
 
-# upload 0-1 normalized HA/Myc ratios as measured by western blotting
-# along with Hill fit parameters 
-western = read.csv("data/westerns.csv")
+# upload western blots
+western = read.csv("data/westerns_GTF_raw.csv")
+# normalize the ratios to end at 1 (divide by maximum value)
+maxVal = western %>% 
+  group_by(factorName, replicate) %>% 
+  summarise(max = max(ratio))
+western = western %>% 
+  left_join(maxVal) %>% 
+  mutate(ratio = ratio/max)
+
+# upload previously obtained parameters for fits
 westernFits = read.csv("data/westerns_fitParam.csv")
 
 # relevel labels for plotting
@@ -44,6 +52,4 @@ p + geom_smooth(aes(group = factorName),
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank()) +
   geom_point(size = 0.8) +
-  geom_errorbar(aes(ymin=ratio-ratio_sd, ymax=ratio+ratio_sd), 
-                position=position_dodge(0.05)) +
   facet_wrap(~factorName, nrow = 1)

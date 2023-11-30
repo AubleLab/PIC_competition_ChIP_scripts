@@ -3,8 +3,17 @@ rm(list = ls())
 library(tidyverse)
 
 # upload western blots
-western = read.csv("data/westerns.csv") %>% 
+western = read.csv("data/westerns_GTF_raw.csv") %>% 
   dplyr::filter(factorName == "TFIIE")
+
+# normalize the ratios to end at 1 (divide by maximum value)
+maxVal = western %>% 
+  group_by(factorName, replicate) %>% 
+  summarise(max = max(ratio))
+western = western %>% 
+  left_join(maxVal) %>% 
+  mutate(ratio = ratio/max)
+# upload previously obtained parameters for fits
 westernFits = read.csv("data/westerns_fitParam.csv") %>% 
   dplyr::filter(factorName == "TFIIE")
 
@@ -34,6 +43,4 @@ p + geom_smooth(method="nls",
         panel.grid.minor = element_blank(),
         plot.title = element_text(face="bold", size = 9)) +
   geom_point(size = 0.8, color = "#E64A45") +
-  geom_errorbar(aes(ymin=ratio-ratio_sd, ymax=ratio+ratio_sd), 
-                position=position_dodge(0.05), color = "#E64A45") +
   ggtitle("TFIIE")
